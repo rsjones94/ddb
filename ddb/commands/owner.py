@@ -14,7 +14,7 @@ class Owner(commands.Cog):
     @commands.command(
         aliases=['sts'],
         description='Bot status',
-        usage='p?stats'
+        usage='!stats'
     )
     @commands.is_owner()
     async def stats(self, ctx: commands.Context):
@@ -35,7 +35,7 @@ class Owner(commands.Cog):
         name='loadextension',
         aliases=['load', 'ld'],
         description='Load an extension',
-        usage='p?loadextension <extension>'
+        usage='!loadextension <extension>'
     )
     @commands.is_owner()
     async def _loadExtension(self, ctx: commands.Context, extension: str):
@@ -54,7 +54,7 @@ class Owner(commands.Cog):
         name='unloadextension',
         aliases=['unload', 'uld'],
         description='Unload an extension',
-        usage='p?unloadextension <extension>'
+        usage='!unloadextension <extension>'
     )
     @commands.is_owner()
     async def _unloadExtension(self, ctx: commands.Context, extension: str):
@@ -73,7 +73,7 @@ class Owner(commands.Cog):
         name='reloadextension',
         aliases=['reload', 'rld'],
         description='Reload an extension',
-        usage='p?reloadextension <extension>'
+        usage='!reloadextension <extension>'
     )
     @commands.is_owner()
     async def _unloadExtension(self, ctx: commands.Context, extension: str):

@@ -37,7 +37,7 @@ class Public(commands.Cog):
     @commands.command(
         aliases=['h'],
         description='The help command for the help command',
-        usage='p?help {command}',
+        usage='!help {command}',
         note='If {command} is specified, it will show the detailed help for that command'
     )
     @commands.has_permissions()
@@ -52,7 +52,7 @@ class Public(commands.Cog):
 
         embed = discord.Embed(
             title='VoteBot Help Menu',
-            description='For more details on the command, type `p?help {command}`',
+            description='For more details on the command, type `!help {command}`',
             colour=discord.Color.purple()
         )
         embed.set_thumbnail(url=self.bot.user.avatar_url)
@@ -71,7 +71,7 @@ class Public(commands.Cog):
         name='bug',
         aliases=['b'],
         description='Report a bug',
-        usage='p?bug <report>',
+        usage='!bug <report>',
         cooldown='30 seconds'
     )
     @commands.cooldown(1, 30, commands.BucketType.user)
@@ -98,7 +98,7 @@ class Public(commands.Cog):
         name='suggestion',
         aliases=['sug'],
         description='Send a suggestion or idea you have that could be interesting for the bot',
-        usage='p?suggestion <seggestion>',
+        usage='!suggestion <seggestion>',
     )
     async def _anSuggestion(self, ctx: commands.Context, *, suggestion: str):
         embed = discord.Embed(title='🗨 Suggestion', colour=discord.Color.purple())

@@ -61,14 +61,25 @@ class Vote(commands.Cog):
         name='vote',
         aliases=['vt', 'v'],
         description='Create a poll',
-        usage='p?vote <question> {answers}',
+        usage='!vote <question> {answers}',
         note='If {answers} is not specified, a YES or No vote will be taken, otherwise, the specified responses will be used.',
         examples=[
-            '`p?vote "You like apple?"` (only YES and NO answers)',
-            '`p?vote "Which movie to watch?" "Harry Potter" "How To Train Your Dragon" "Don\'t watch"` (With question and answers)'
+            '`!vote "You like apple?"` (only YES and NO answers)',
+            '`!vote "Which movie to watch?" "Harry Potter" "How To Train Your Dragon" "Don\'t watch"` (With question and answers)'
         ],
     )
-    async def _createVote(self, ctx: commands.Context, question: str, *answers: Optional[str]):
+    async def _createVote(self, ctx: commands.Context, question: str, *answers: Optional[str], back2list=False):
+        
+        if back2list:
+            inner = answers[0]
+            #print(f'{inner} (type:{type(inner)})')
+            #rem_brack = inner[1:-1]
+            #print(f'{rem_brack} (type:{type(rem_brack)})')
+            #split_by_comma = rem_brack.split(',')
+            #print(f'{split_by_comma} (type:{type(split_by_comma)})')
+            #answers = [f[1:-1] for f in split_by_comma]
+            answers = inner
+        
         if(len(answers) > 20):
             return await ctx.send(embed=discord.Embed(
                 title='Many Answers', description=f'{ctx.author.mention}, the answer limit is 20', colour=discord.Color.dark_red())
@@ -80,7 +91,7 @@ class Vote(commands.Cog):
         embed.set_author(name=str(ctx.author), icon_url=ctx.author.avatar_url)
         embed.set_footer(text='Voting')
         embed.timestamp = datetime.utcnow()
-
+        
         if(answers):
             embed.description = '\n'.join([f'{emote} {answer}' for emote, answer in zip(emotesToUse, answers)])
 
@@ -91,7 +102,7 @@ class Vote(commands.Cog):
         name='endvote',
         aliases=['endv', 'ev'],
         description='Ends a poll by passing the message ID',
-        usage='p?endvote <message id>',
+        usage='!endvote <message id>',
         note='You can also end a poll just by reacting with :stop_button: in the poll message'
     )
     async def _endVote(self, ctx: commands.Context, messageId: int):

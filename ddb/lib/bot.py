@@ -9,12 +9,13 @@ from discord.ext import commands
 from utils.constants import COMMANDS_PATH
 
 intents = discord.Intents().default()
+intents.members = True
 
 class VoteBot(commands.Bot):
     def __init__(self):
         super().__init__(
-            command_prefix='p?',
-            description='A simple voting bot to make your polls easier!',
+            command_prefix='!',
+            description='Our lab bot <3',
             help_command=None,
             case_insensitive=True,
             loop=asyncio.get_event_loop(),
@@ -34,7 +35,9 @@ class VoteBot(commands.Bot):
         for extension in extensions: self.load_extension(f'{extensionsPath}{extension}')
     
     async def on_error(self, event, *args, **kwargs):
+        print('Encountered an error...')
         if(self.dev):
+            print('Dev')
             traceback.print_exc()
         else:
             embed = discord.Embed(
@@ -43,11 +46,13 @@ class VoteBot(commands.Bot):
                 colour=discord.Color.dark_red()
             )
             embed.add_field(name='Event', value=event)
-            embed.timestamp = datetime.datetime.utcnow()
+            embed.timestamp = datetime.utcnow()
 
             try:
-                await self.bot.info.owner.send(embed=embed)
-            except:
+                await self.info.owner.send(embed=embed)
+            except Exception as e:
+                print('Could not log error to owner')
+                print(e)
                 pass
 
     async def on_command_error(self, ctx, error):
