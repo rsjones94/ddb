@@ -19,7 +19,13 @@ class Bullying(commands.Cog):
                 '856936371036618793':'ddb'
             }
 
-    @commands.command(name='bully', help='Bullies someone who deserves it.')
+    @commands.command(name='bully',
+        description='Bullies someone who deserves it [NOT IMPLEMENTED]',
+        usage='!bully @<user>',
+        examples=[
+            '`!bully @GRIMR34P3R` (bullies Maria)'
+        ],
+    )
     async def bully(self, ctx, user_id):
         
         user = ''.join(c for c in user_id if c.isdigit())

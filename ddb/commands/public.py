@@ -66,7 +66,27 @@ class Public(commands.Cog):
         ]))
 
         await ctx.send(embed=embed)
+        
+    @commands.command(name='commands',
+        description='Prints a list of available commands',
+        usage='!commands'
+    )
+    async def commands(self, ctx):
+ 
+        commands = [command.name for command in self.bot.commands]
+        descriptions = [command.description for command in self.bot.commands]
+        
+        zipped_lists = zip(commands, descriptions)
+        sorted_pairs = sorted(zipped_lists)
+        
+        the_output = ''
+        for cmd, des in sorted_pairs:
+            the_output = the_output + f'\n{cmd}: {des}'
+         
+        embedder = discord.Embed(title=f'Available commands', description=the_output, colour=discord.Color.purple())
+        await ctx.send(embed=embedder)
 
+    '''
     @commands.command(
         name='bug',
         aliases=['b'],
@@ -94,6 +114,7 @@ class Public(commands.Cog):
                 colour=discord.Color.green()
             ))
 
+    
     @commands.command(
         name='suggestion',
         aliases=['sug'],
@@ -118,6 +139,8 @@ class Public(commands.Cog):
                 description='Thanks for submitting the suggestion!!',
                 colour=discord.Color.green()
             ))
+    '''
+    
 
 def setup(bot: VoteBot):
     bot.add_cog(Public(bot))
