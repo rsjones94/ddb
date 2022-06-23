@@ -23,7 +23,6 @@ class VoteBot(commands.Bot):
         )
 
         self.version = '0.0.1'
-
         self.loadExtensions()
 
     async def sendMessageToOwner(self, *, content: str = None, embed: discord.Embed = None):
@@ -33,6 +32,7 @@ class VoteBot(commands.Bot):
         extensions = [filename[:-3] for filename in os.listdir(COMMANDS_PATH) if filename.endswith('.py') and not filename.startswith('_')]
 
         for extension in extensions: self.load_extension(f'{extensionsPath}{extension}')
+           
     
     async def on_error(self, event, *args, **kwargs):
         print('Encountered an error...')

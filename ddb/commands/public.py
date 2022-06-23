@@ -86,6 +86,9 @@ class Public(commands.Cog):
         embedder = discord.Embed(title=f'Available commands', description=the_output, colour=discord.Color.purple())
         await ctx.send(embed=embedder)
 
+
+        
+
     '''
     @commands.command(
         name='bug',
